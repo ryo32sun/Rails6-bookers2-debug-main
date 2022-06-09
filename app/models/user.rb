@@ -12,8 +12,8 @@ class User < ApplicationRecord
   has_many :re_relationships ,class_name: "Relationship" , foreign_key: "followed_id", dependent: :destroy
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   
-  has_many :followers, through: :relationships, source: :follower
-  has_many :followes, through: :re_relationships, source: :followed
+  has_many :followes, through: :relationships, source: :followed
+  has_many :followers, through: :re_relationships, source: :follower
   
   has_one_attached :profile_image
 
@@ -25,4 +25,17 @@ class User < ApplicationRecord
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
+  
+  def follow(user_id)
+    relationships.create(followed_id: user_id)
+  end
+  
+  def unfollow(user_id)
+    relationships.find_by(followed_id: user_id).destroy
+  end
+  
+  def followes?(user)
+    followes.include?(user)
+  end
+  
 end
