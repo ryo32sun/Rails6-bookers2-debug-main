@@ -11,9 +11,7 @@ class Book < ApplicationRecord
   end
   
   def self.looks(search, word)
-    if word == ""
-      @book = Book.all
-    elsif search == "perfect_match"
+    if search == "perfect_match"
       @book = Book.where("title LIKE?" , "#{word}")
     elsif search == "forward_match"
       @book = Book.where("title LIKE?" , "#{word}%")

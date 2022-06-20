@@ -10,9 +10,12 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <%= render 'layouts/search' ,class:"mx-auto" %>
+    <%#= render 'layouts/search' ,class:"mx-auto" %>
       <main>
         <p id="notice"><%= notice %></p>
+        <div class="d-flex justify-content-center mb-2">
+          <%= render 'layouts/search'%>
+        </div>
         <%= yield %>
       </main>
     <%= render 'layouts/footer' %>
