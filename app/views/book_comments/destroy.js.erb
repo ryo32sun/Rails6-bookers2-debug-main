@@ -1,1 +1,2 @@
-$("#comments").html("<%= j (render 'book_comments/comments', book: @book, book_comment: @book_comment) %>");
+$("#comments").html("<%= j (render 'book_comments/comments', book: @book ) %>");
+$(".comments-counter").html("コメント数: <%= @book.book_comments.count %>");

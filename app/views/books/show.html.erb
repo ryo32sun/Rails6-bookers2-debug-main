@@ -20,8 +20,8 @@
           <td id="favorite_buttuons<%= @book.id %>">
             <%= render "favorites/favorite", book: @book %>
           </td>
-          <td>
-            <p>コメント数：<%= @book.book_comments.count %></p>
+          <td class="comments-counter">
+            <%= render "book_comments/comments_counter", book: @book %>
           </td>
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
@@ -30,7 +30,13 @@
         </tr>
       </table>
       <div id="comments">
-        <%= render "book_comments/comments" , book: @book , book_comment: @book_comment %>
+        <%= render "book_comments/comments" , book: @book %>
+      </div>
+      <div class="form-group" >
+        <%= form_with model: [@book, @book_comment], local: false do |f| %>
+          <%= f.text_area :comment ,rows: "5" ,class:"form-control" ,  id:"comment-form"%>
+          <%= f.submit "送信" ,class: "mt-1" %>
+        <% end %>
       </div>
     </div>
   </div>
