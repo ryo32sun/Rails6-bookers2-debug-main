@@ -9,6 +9,13 @@ class BooksController < ApplicationController
     @books = Book.order("#{sort_column} #{sort_direction}")
     @book = Book.new
   end
+  
+  def search_book
+    @books = Book.search(params[:keyword])
+    @range = "Book"
+    @word = params[:keyword]
+    
+  end
 
   def create
     @book = Book.new(book_params)
@@ -48,7 +55,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :rate)
+    params.require(:book).permit(:title, :body, :category, :rate)
   end
   
 

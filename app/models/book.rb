@@ -13,6 +13,10 @@ class Book < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+  
+  def self.search(search_word)
+    Book.where(['category LIKE?', "#{search_word}"])
+  end
 
   def self.looks(search, word)
     if search == "perfect_match"

@@ -5,4 +5,8 @@
       <%= f.select :search, options_for_select([["完全一致","perfect"],["前方一致","forward"],["後方一致","backward"],["部分一致","partial"]]) %>
       <%= f.submit "検索", class: "btn btn-primary" %>
     <% end %>
+    <%= form_with url: search_book_path, local: true, method: :get, class:"ml-3" do |tag| %>
+      <%= tag.text_field :keyword %>
+      <%= tag.submit "タグ検索", class:"btn btn-success" %>
+    <% end %>
 <% end %>

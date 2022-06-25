@@ -7,11 +7,16 @@
     <%= f.label :body, "Opinion" %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
+  <div class="form-group">
+    <%= f.label :category, "Tag" %>
+    <%= f.text_field :category, class:"form-control" %>
+  </div>
   <div class="form-group" id="star-rate">
     <%= f.label :rate, "評価", class:"col-md-3 col-form-label" %>
     <%= f.hidden_field :rate,id: :review_star %>
   </div>
   <% if book.id == nil %>
+  <!--星評価-->
     <script>
       $('#star-rate').empty();
       $('#star-rate').raty({
