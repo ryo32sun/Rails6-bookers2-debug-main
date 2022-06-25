@@ -1,11 +1,12 @@
 class BooksController < ApplicationController
+  
   def show
     @book = Book.find(params[:id])
     @book_comment = BookComment.new
   end
 
   def index
-    @books = Book.all
+    @books = Book.order("#{sort_column} #{sort_direction}")
     @book = Book.new
   end
 
@@ -49,4 +50,6 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :body, :rate)
   end
+  
+
 end

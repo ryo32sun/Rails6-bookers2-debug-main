@@ -1,6 +1,19 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:top, :about]
   before_action :configure_permitted_parameters, if: :devise_controller?
+  
+  helper_method :sort_column, :sort_direction
+  
+  protected
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+  end
+  
+  def sort_column
+    Book.column_names.include?(params[:sort]) ? params[:sort] : 'title'
+  end
+  
 
   private
 

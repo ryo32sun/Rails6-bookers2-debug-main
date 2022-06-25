@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
+  
   before_action :ensure_correct_user, only: [:update]
   before_action :ensure_guest_user, only: [:edit]
   def show
     @user = User.find(params[:id])
-    @books = @user.books
+    @books = @user.books.order("#{sort_column} #{sort_direction}")
     @book = Book.new
     @followers = @user.followers.all
   end
