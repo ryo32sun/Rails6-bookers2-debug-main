@@ -6,12 +6,12 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.order("#{sort_column} #{sort_direction}")
+    @books = Book.order("#{sort_column} #{sort_direction}").page(params[:page])
     @book = Book.new
   end
   
   def search_book
-    @books = Book.search(params[:keyword])
+    @books = Book.search(params[:keyword]).page(params[:page])
     @range = "Book"
     @word = params[:keyword]
     

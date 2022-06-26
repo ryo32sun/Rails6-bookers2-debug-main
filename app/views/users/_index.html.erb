@@ -23,5 +23,8 @@
         <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
       </tr>
     <% end %>
+    <tr>
+      <%= paginate users %>
+    </tr>
   </tbody>
 </table>

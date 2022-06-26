@@ -4,13 +4,17 @@ class UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
   def show
     @user = User.find(params[:id])
-    @books = @user.books.order("#{sort_column} #{sort_direction}")
+    @books = @user.books.order("#{sort_column} #{sort_direction}").page(params[:page])
     @book = Book.new
     @followers = @user.followers.all
+    @today_books = @user.books.created_days_ago(0)
+    @yesterday_books = @user.books.created_days_ago(1)
+    @thisweek_books = @user.books.where(created_at: [1.week.ago.midnight..Time.now])
+    @lastweek_books = @user.books.where(created_at: [3.week.ago.midnight..1.week.ago.end_of_day])
   end
 
   def index
-    @users = User.all
+    @users = User.page[params[:page]]
     @book = Book.new
   end
 
