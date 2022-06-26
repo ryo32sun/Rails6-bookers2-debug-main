@@ -19,3 +19,6 @@ ActiveStorage.start()
 
 window.$ = window.jQuery = require('jquery');
 require('packs/raty')
+
+require("chartkick")
+require("chart.js")
