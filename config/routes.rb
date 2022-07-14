@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resource :relationships, only: [:create, :destroy]
     get "followers" => "relationships#followers", as: "followers"
     get "followes"  => "relationships#followes", as: "followes"
+    get "search" => "users#search"
   end
 
   devise_scope :user do
